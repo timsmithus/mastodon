@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Mastodon Moving</title>
+<link rel="stylesheet" href="shared/fonts.css">
+<link rel="stylesheet" href="shared/styles.css">
+<style>
+.about-hero { position: relative; overflow: hidden; isolation: isolate; color: var(--cream); padding: calc(var(--nav-h) + 80px) var(--pad-x) 100px; }
+.about-hero .hero-bg { position: absolute; inset: 0; z-index: -1; }
+.about-hero .hero-bg img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 0; display: block; }
+.about-hero .hero-bg::after { content: ''; position: absolute; inset: 0; background: rgba(17,46,29,0.7); }
+.about-hero .container { max-width: var(--maxw); margin: 0 auto; }
+.about-hero .eyebrow { color: var(--mint); }
+.about-hero .h-display { color: var(--cream); margin-top: 18px; max-width: 22ch; }
+.about-hero .h-display .accent { color: var(--mint); }
+.about-hero .lede { color: rgba(240,234,229,0.8); margin-top: 36px; max-width: 60ch; }
+
+.story { background: var(--g900); color: var(--cream); padding: clamp(80px, 10vw, 130px) var(--pad-x); }
+.story-grid { max-width: var(--maxw); margin: 0 auto; display: grid; grid-template-columns: 1.4fr 1fr; gap: clamp(40px, 6vw, 96px); align-items: start; }
+.story h2 { font-family: 'SohoProCond', sans-serif; font-weight: 700; font-size: clamp(36px, 4.4vw, 56px); line-height: 1; letter-spacing: -0.01em; text-transform: uppercase; color: var(--cream); }
+.story .col-body p { color: rgba(240,234,229,0.78); }
+.story .col-body p + p { margin-top: 18px; }
+
+.giving { background: var(--cream-2); padding: clamp(70px, 9vw, 110px) var(--pad-x); color: var(--g900); }
+.giving-grid { max-width: var(--maxw); margin: 0 auto; display: grid; grid-template-columns: 1fr 1.4fr; gap: clamp(40px, 6vw, 96px); align-items: start; }
+.giving h2 { font-family: 'SohoProCond', sans-serif; font-weight: 700; font-size: clamp(36px, 4.4vw, 56px); text-transform: uppercase; line-height: 1; }
+.giving .body { color: var(--g700); margin-bottom: 28px; }
+.giving-list { display: grid; grid-template-columns: 1fr 1fr; gap: 0 32px; list-style: none; margin: 0; padding: 0; }
+.giving-list li { font-size: 15px; padding: 13px 0; border-bottom: 1px solid rgba(17,46,29,0.25); letter-spacing: 0.02em; }
+
+.owner { background: var(--white); color: var(--g900); padding: clamp(80px, 10vw, 130px) var(--pad-x); }
+.owner-grid { max-width: var(--maxw); margin: 0 auto; display: grid; grid-template-columns: 1fr 1.4fr; gap: clamp(40px, 6vw, 96px); align-items: start; }
+.owner .col-media .ph { aspect-ratio: 3/4; width: 100%; }
+.owner h2 { font-family: 'SohoProCond', sans-serif; font-weight: 700; font-size: clamp(36px, 4.4vw, 56px); line-height: 1; text-transform: uppercase; color: var(--g900); }
+.owner .col-body p { color: var(--g700); }
+.owner .col-body p + p { margin-top: 18px; }
+.owner .pull-quote { margin: 48px 0; padding: 32px 0; border-top: 2px solid rgba(17,46,29,0.18); border-bottom: 2px solid rgba(17,46,29,0.18); font-family: 'SohoPro', sans-serif; font-weight: 300; font-size: clamp(22px, 2.5vw, 33px); line-height: 1.25; font-style: italic; letter-spacing: -0.01em; color: var(--g900); text-indent: -0.26em; hanging-punctuation: first; }
+.owner .pull-quote cite { display: block; margin-top: 28px; font-style: normal; font-family: 'Roboto', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--g500); }
+
+.enviro { background: var(--mint); padding: clamp(80px, 10vw, 130px) var(--pad-x); }
+.enviro-head { max-width: var(--maxw); margin: 0 auto 56px; }
+.enviro-grid { max-width: var(--maxw); margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px, 6vw, 96px); }
+.enviro h3 { font-family: 'SohoProCond', sans-serif; font-weight: 700; font-size: clamp(24px, 2.4vw, 32px); text-transform: uppercase; line-height: 1.05; margin-bottom: 16px; }
+.enviro-head h2 { font-family: 'SohoProCond', sans-serif; font-weight: 700; font-size: clamp(36px, 4.4vw, 56px); text-transform: uppercase; line-height: 1; letter-spacing: -0.01em; }
+.enviro .body + .body { margin-top: 16px; }
+
+.cta-strip { background-color: #977049; background-image: linear-gradient(rgba(128,98,52,0.76), rgba(104,78,40,0.82)), url('uploads/cardboard.jpg'); background-size: cover; background-position: center; color: var(--cream); padding: clamp(80px, 11vw, 140px) var(--pad-x); text-align: center; }
+.cta-strip .h1 { margin-bottom: 28px; }
+.cta-strip .btn-primary { background: #fff; color: var(--g900); }
+.cta-strip .btn-primary:hover { background: var(--cream); }
+.cta-strip .cta-phone { background: none; border: none; padding: 2px 0; color: var(--cream); }
+.cta-strip .cta-phone:hover { background: none; color: var(--mint); }
+.cta-strip .lede { margin: 0 auto 40px; color: rgba(240,234,229,0.78); }
+.cta-strip .actions { display: inline-flex; flex-direction: column; gap: 16px; align-items: center; }
+
+@media (max-width: 880px) {
+  .story-grid, .giving-grid, .owner-grid, .enviro-grid { grid-template-columns: 1fr; }
+  .giving-list { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body data-page="about">
+
+<div id="nav-mount"></div>
+
+<main>
+
+<section class="about-hero" data-screen-label="About Hero">
+  <div class="hero-bg"><img src="uploads/Team.jpg" alt="The Mastodon Moving crew"></div>
+  <div class="container reveal">
+    <h1 class="h-display">Small, local team.<br><span class="accent">Massive moving might.</span></h1>
+    <p class="lede">We are a tight-knit team of movers dedicated to being a premier moving company. We go beyond expectations to be the best in the business.</p>
+  </div>
+</section>
+
+<section class="owner" data-screen-label="Meet the Owner">
+  <div class="owner-grid">
+    <div class="col-media reveal">
+      <img src="uploads/jj-profile_lg.jpg" alt="JJ Przybylski" style="width:100%;aspect-ratio:3/4;object-fit:cover;display:block;">
+    </div>
+    <div class="col-body reveal">
+      <div class="eyebrow">Meet the owner</div>
+      <div class="rule" style="background: var(--g900); margin-top: 14px;"></div>
+      <h2 style="margin-bottom: 28px;">JJ Przybylski.</h2>
+      <p class="body">JJ founded Mastodon Moving in 2011 after years in the moving business, setting out to build a company that not only provided unrivaled customer service but also did its part to change the world around it for the better. Following the mantra to "be the change you want to see in the world," Mastodon strives to raise the standard of professionalism, customer service, and social responsibility in the moving industry.</p>
+      <div class="pull-quote">
+        "People rely on us to move their prized possessions and valuables. It's our job to give clarity, the best customer service, and the best moving services to ensure a stress-free move."
+        <cite>— JJ Przybylski, founder</cite>
+      </div>
+      <p class="body">Today, Mastodon Moving is stronger than ever and continues to move people into their new homes with care, while actively supporting socially responsible initiatives. JJ received his degree in business management from Fairfield University in 2013.</p>
+    </div>
+  </div>
+</section>
+
+<section class="story" data-screen-label="Who We Are">
+  <div class="story-grid">
+    <div>
+      <div class="eyebrow on-dark">Who we are</div>
+      <div class="rule mint" style="margin-top: 14px;"></div>
+      <h2 class="reveal">Our commitment<br>to you.</h2>
+      <div class="col-body reveal body" style="margin-top:48px;">
+        <p>Mastodon Moving LLC is a fully licensed and insured small business founded in Wayland, MA. We provide personal, high-quality customer service throughout the entire moving process — from your initial estimate onwards, you'll be in the hands of a small team committed to making your move as easy as possible.</p>
+        <p>Our experienced and friendly movers treat their profession with pride. They care about each customer and take every precaution to protect your home. Each item is securely packed and wrapped before it goes on the truck. Whether you're moving across town or across the country, your belongings will make the journey safely.</p>
+        <p>We'll always make sure you're aware of your options for coverage, inventories, and storage. Fourteen years on, we operate out of a 34,000 sq ft warehouse in Westborough with a team of full-time movers, packers, and project managers — and most of our work still comes from referrals.</p>
+      </div>
+    </div>
+    <div class="reveal">
+      <img src="uploads/Trucks.jpg" alt="Mastodon Moving truck fleet" style="width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center center;display:block;">
+    </div>
+  </div>
+</section>
+
+<section class="enviro" data-screen-label="Environmental Care">
+  <div class="enviro-head reveal">
+    <div class="eyebrow">Doing it greener</div>
+    <div class="rule" style="background: var(--g900); margin-top: 14px;"></div>
+    <h2 class="reveal">Environmental<br>care.</h2>
+  </div>
+  <div class="enviro-grid">
+    <div class="reveal">
+      <h3>How we move today</h3>
+      <p class="body">Using renewable resources is important to us. Everything that doesn't fit into our recyclable cardboard boxes gets wrapped in reusable pads, and we prioritize rubber bands over tape when wrapping furniture.</p>
+      <p class="body">We also make sure to recycle all materials at the appropriate facilities — for electronic disposals, we work with Computer Recycling USA to lower our environmental impact.</p>
+    </div>
+    <div class="reveal">
+      <h3>Looking toward the future</h3>
+      <p class="body">In our quest to lower our carbon footprint even further, we're actively researching methods and equipment to cut our fleet's fuel dependency. It's our hope that it inspires other companies — and individuals — to join us in our environmental efforts.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cta-strip" data-screen-label="CTA">
+  <div class="reveal">
+    <div class="eyebrow on-dark" style="margin-bottom: 24px;">Now then</div>
+    <h2 class="h1">Let's get<br>you moved.</h2>
+    <p class="lede">Tell us about your move. We'll come walk through it with you and put together a real plan.</p>
+    <div class="actions">
+      <a href="quote.html" class="btn btn-primary">Get a free estimate <span class="arrow"></span></a>
+      <a href="tel:7744219004" class="btn cta-phone">Or call (774) 421-9004</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div id="footer-mount"></div>
+<script src="shared/chrome.js"></script>
+</body>
+</html>

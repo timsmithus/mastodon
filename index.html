@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mastodon Moving — Award-winning movers in Greater Boston</title>
+<link rel="stylesheet" href="shared/fonts.css">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&display=swap">
+<link rel="stylesheet" href="shared/styles.css">
+<style>
+/* ─── Hero ─── */
+.hero {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  min-height: 560px;
+  background: var(--g900);
+  color: var(--cream);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.hero-media {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  overflow: hidden;
+}
+.hero-media video,
+.hero-media .hero-still {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.hero-still {
+  background: linear-gradient(135deg, #112E1D 0%, #2F4B3C 100%);
+  display: flex; align-items: center; justify-content: center;
+}
+.hero-still .ph-label {
+  border-color: rgba(184,210,178,0.4);
+  background: rgba(17,46,29,0.6);
+  color: var(--mint);
+}
+.hero-vignette {
+  position: absolute; inset: 0;
+  background: rgba(17,46,29,0.7);
+}
+.hero-inner {
+  position: relative; z-index: 2;
+  flex: 1;
+  padding: var(--nav-h) var(--pad-x) 210px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.hero-top {
+  max-width: 1100px;
+  width: 100%;
+  padding-bottom: 0;
+}
+.hero-bottom {
+  margin-top: clamp(20px, 3vw, 40px);
+}
+.hero-badges {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  z-index: 2;
+  padding: 26px var(--pad-x) 32px;
+}
+.hero-badges .badges-row {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+.hero-badges .badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  line-height: 1.35;
+}
+.hero-badges .badge-icon {
+  flex: 0 0 78px;
+  width: 78px;
+  height: 78px;
+  display: flex; align-items: center; justify-content: center;
+}
+.hero-badges .badge-icon img,
+.hero-badges .badge-icon svg { width: 78px; height: 78px; display: block; object-fit: contain; }
+.hero-badges .badge-icon img { filter: brightness(0) saturate(100%) invert(89%) sepia(9%) saturate(626%) hue-rotate(66deg) brightness(93%) contrast(89%); }
+.hero-badges .badge span { color: var(--mint); }
+@media (max-width: 880px) {
+  .hero-badges .badges-row { grid-template-columns: 1fr 1fr; gap: 24px 16px; }
+}
+
+/* ─── Hero strip (sits below video) ─── */
+section.hero-strip {
+  background: #112E1D !important;
+  color: #F0EAE5 !important;
+  padding: 36px var(--pad-x) !important;
+}
+section.hero-strip .hero-tagline,
+section.hero-strip .hero-meta,
+section.hero-strip .hero-meta a { color: #F0EAE5 !important; }
+.hero-strip-inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+}
+.hero-top .eyebrow { color: var(--mint); margin-bottom: 28px; }
+.hero-headline {
+  font-family: 'SohoProCond', sans-serif;
+  font-weight: 700;
+  font-size: clamp(56px, 9vw, 148px);
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--cream);
+  margin-left: -0.04em;
+}
+.hero-headline em {
+  font-style: normal;
+  color: var(--mint);
+}
+.hero-bottom {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px 48px;
+  align-items: center;
+}
+.hero-bottom .hero-tagline { flex: 1 1 360px; max-width: 44ch; }
+.hero-tagline {
+  font-size: 18px;
+  line-height: 1.45;
+  color: rgba(240,234,229,0.85);
+  max-width: 38ch;
+}
+.hero-meta {
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(240,234,229,0.55);
+  display: flex; flex-direction: column; gap: 6px;
+}
+.hero-meta a { color: var(--cream); font-weight: 700; font-size: 18px; letter-spacing: 0.04em; text-transform: none; }
+.hero-actions { display: flex; gap: 12px; }
+@media (max-width: 880px) {
+  .hero-bottom { gap: 24px; }
+  .hero-actions { flex-direction: row; flex-wrap: wrap; }
+}
+
+/* ─── Intro / mission ─── */
+.intro {
+  background: var(--cream);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(40px, 6vw, 88px);
+  align-items: center;
+}
+.intro .col-text { max-width: 560px; }
+.intro .col-media .ph {
+  aspect-ratio: 4/5;
+  width: 100%;
+}
+.intro h2 { margin-bottom: 28px; }
+.intro p + p { margin-top: 18px; }
+.intro .meta-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  margin-top: 48px;
+  padding-top: 36px;
+  border-top: 2px solid rgba(17,46,29,0.15);
+}
+.intro .stat-n {
+  font-family: 'SohoProCond', sans-serif;
+  font-size: clamp(40px, 4.5vw, 60px);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: var(--g900);
+  font-weight: 700;
+}
+.intro .stat-l {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--g500);
+  margin-top: 10px;
+}
+@media (max-width: 880px) {
+  .intro { grid-template-columns: 1fr; }
+}
+
+/* ─── Services index ─── */
+.svc-index { background: var(--white); color: var(--g900); }
+.svc-head {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 64px;
+  align-items: end;
+  margin-bottom: 64px;
+}
+.svc-head .lede { color: var(--g700); }
+.svc-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  border-top: 2px solid rgba(17,46,29,0.15);
+}
+.svc-row {
+  display: grid;
+  grid-template-columns: 64px 1fr 2fr auto;
+  gap: 48px;
+  padding: 36px 0;
+  align-items: baseline;
+  border-bottom: 2px solid rgba(17,46,29,0.15);
+  transition: padding .25s ease, color .25s ease;
+}
+.svc-row:hover { padding-left: 16px; color: var(--ink); }
+.svc-row .num {
+  font-family: 'Roboto', monospace;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  color: var(--g500);
+}
+.svc-row .title {
+  font-family: 'SohoProCond', sans-serif;
+  font-size: clamp(28px, 3vw, 44px);
+  text-transform: uppercase;
+  line-height: 1;
+  letter-spacing: -0.005em;
+  font-weight: 700;
+}
+.svc-row .desc {
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--g700);
+  max-width: 50ch;
+}
+.svc-row .arrow-link {
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--g900);
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  white-space: nowrap;
+}
+.svc-row .arrow-link::after {
+  content: '→';
+  font-size: 14px;
+  transition: transform .2s;
+}
+.svc-row:hover .arrow-link::after { transform: translateX(6px); }
+
+@media (max-width: 1100px) {
+  .svc-row { grid-template-columns: 1fr; gap: 12px; }
+  .svc-row .arrow-link { justify-self: start; }
+}
+
+/* ─── Quick links (real photos) ─── */
+.quick3 { background: var(--white); padding-top: 0; padding-bottom: 40px; }
+.quick3-grid { max-width: 2246px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; padding: 20px 24px 0; }
+.q-card {
+  position: relative;
+  display: block;
+  aspect-ratio: 4/5;
+  border-radius: 6px;
+  transition: transform .25s ease;
+}
+.q-card:hover { transform: translateY(-6px); }
+.q-card { aspect-ratio: 1/1.15; }
+.q-card .bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+.q-card .box-inner {
+  position: absolute; inset: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  padding: 32px 56px;
+  padding-top: 140px;
+}
+.q-card .q-num { font-family: 'Roboto', monospace; font-size: 11px; letter-spacing: 0.22em; margin-bottom: 44px; color: var(--g500); }
+.q-card h3 { font-family: 'SohoProCond', sans-serif; font-weight: 700; font-size: clamp(26px, 2.4vw, 34px); line-height: 1; text-transform: uppercase; margin-bottom: 14px; color: var(--g900); }
+.q-card p { font-size: 14.5px; line-height: 1.55; margin-bottom: 28px; color: var(--g700); }
+.q-card .arrow-link { margin-top: 48px; font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 10px; color: var(--g900); }
+.q-card .arrow-link::after { content: '→'; transition: transform .2s; }
+.q-card:hover .arrow-link::after { transform: translateX(6px); }
+@media (max-width: 880px) { .quick3-grid { grid-template-columns: 1fr; } }
+
+/* ─── Reviews ("We're top rated for a reason") ─── */
+.reviews { background: var(--cream-2); color: var(--g900); }
+.rev-head { max-width: var(--maxw); margin: 0 auto 56px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: end; }
+.rev-head .lede { color: var(--g700); }
+.rev-grid { max-width: var(--maxw); margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; align-items: stretch; }
+.rev-card { position: relative; background: repeating-linear-gradient(#f7f1e6, #f7f1e6 27px, rgba(17,46,29,0.03) 27px, rgba(17,46,29,0.03) 28px); border-radius: 10px; padding: 30px 30px 26px; display: flex; flex-direction: column; box-shadow: 0 1px 0 rgba(17,46,29,0.08), 0 14px 26px -14px rgba(17,46,29,0.32); border: 1px solid rgba(17,46,29,0.12); transition: transform 0.35s ease, box-shadow 0.35s ease; }
+.rev-card:nth-child(1) { transform: rotate(-1.2deg); }
+.rev-card:nth-child(2) { transform: rotate(0.6deg); }
+.rev-card:nth-child(3) { transform: rotate(-0.5deg); }
+.rev-card:hover { transform: rotate(0) translateY(-4px); box-shadow: 0 1px 0 rgba(17,46,29,0.08), 0 22px 40px -18px rgba(17,46,29,0.4); }
+.rev-card .stars { font-size: 13px; letter-spacing: 0.3em; color: var(--g500); margin-bottom: 18px; }
+.rev-card blockquote { font-family: 'Caveat', cursive; font-size: 24px; line-height: 1.4; color: var(--g900); }
+.rev-card cite { display: block; margin-top: 22px; margin-top: auto; padding-top: 18px; font-style: normal; font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--g500); }
+.rev-actions { max-width: var(--maxw); margin: 56px auto 0; display: flex; flex-direction: column; gap: 20px; align-items: center; text-align: center; }
+.rev-actions .lbl { font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; }
+.rev-actions .btns { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+@media (max-width: 880px) { .rev-head, .rev-grid { grid-template-columns: 1fr; } }
+
+/* ─── CTA ─── */
+.rev-actions .btn { display: inline-flex; align-items: center; }
+.rev-actions .btn-yelp, .rev-actions .btn-google, .rev-actions .btn-angi { background: var(--white); box-shadow: inset 0 0 0 1px rgba(17,46,29,0.15); padding: 14px 24px; }
+.rev-actions .btn img { height: 24px; width: auto; display: block; }
+.cta-strip {
+  background-color: #977049;
+  background-image: linear-gradient(rgba(128,98,52,0.76), rgba(104,78,40,0.82)), url('uploads/cardboard.jpg');
+  background-size: cover;
+  background-position: center;
+  color: var(--cream);
+  padding: clamp(80px, 11vw, 140px) var(--pad-x);
+  text-align: center;
+}
+.cta-strip .h1 { margin-bottom: 28px; }
+.cta-strip .btn-primary { background: #fff; color: var(--g900); }
+.cta-strip .btn-primary:hover { background: var(--cream); }
+.cta-strip .cta-phone { background: none; border: none; padding: 2px 0; color: var(--cream); }
+.cta-strip .cta-phone:hover { background: none; color: var(--mint); }
+.cta-strip .lede { margin: 0 auto 40px; color: rgba(240,234,229,0.78); }
+.cta-strip .actions { display: inline-flex; flex-direction: column; gap: 16px; align-items: center; }
+
+/* ─── Tweaks panel — local-only ─── */
+#tweaks {
+  position: fixed;
+  bottom: 24px; right: 24px;
+  background: rgba(17,46,29,0.95);
+  color: var(--cream);
+  padding: 20px;
+  border: 1px solid rgba(184,210,178,0.25);
+  z-index: 100;
+  display: none;
+  font-size: 12px;
+  width: 280px;
+  backdrop-filter: blur(8px);
+}
+#tweaks.on { display: block; }
+#tweaks h4 {
+  font-family: 'SohoProCond', sans-serif;
+  font-size: 18px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  color: var(--mint);
+}
+#tweaks .tw-row { margin-bottom: 16px; }
+#tweaks label {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(240,234,229,0.6);
+  margin-bottom: 8px;
+}
+#tweaks .swatches { display: flex; gap: 8px; }
+.swatch {
+  width: 28px; height: 28px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  border-radius: 1px;
+}
+.swatch.on { border-color: var(--mint); }
+.tw-segments { display: flex; gap: 4px; }
+.tw-seg {
+  flex: 1;
+  padding: 8px 10px;
+  background: rgba(240,234,229,0.06);
+  border: 1px solid rgba(240,234,229,0.15);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-align: center;
+  cursor: pointer;
+  color: rgba(240,234,229,0.7);
+}
+.tw-seg.on { background: var(--mint); color: var(--g900); border-color: var(--mint); }
+#tweaks-toggle {
+  position: fixed;
+  bottom: 24px; right: 24px;
+  background: var(--g900);
+  color: var(--cream);
+  padding: 12px 18px;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  border: 1px solid rgba(184,210,178,0.3);
+  z-index: 99;
+  display: none;
+}
+#tweaks-toggle.on { display: block; }
+</style>
+</head>
+<body data-page="home">
+
+<div id="nav-mount"></div>
+
+<main>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero" data-screen-label="Hero">
+  <div class="hero-media">
+    <video class="hero-video" autoplay muted loop playsinline>
+      <source src="https://www.mastodonmoving.com/vid/homepage-31.webm" type="video/webm">
+    </video>
+    <div class="hero-still" style="display:none;">
+      <div class="ph-label">Hero photo · crew &amp; truck</div>
+    </div>
+  </div>
+  <div class="hero-vignette"></div>
+
+  <div class="hero-inner">
+    <div class="hero-top reveal">
+      <h1 class="hero-headline">Moving beyond<br><em>expectations.</em></h1>
+    </div>
+    <div class="hero-bottom reveal" style="width: 100%">
+      <p class="hero-tagline" style="height: 56px; width: 600px">Local movers who sweat the details.<br>Treating every move like it’s our own.</p>
+    </div>
+  </div>
+  <div class="hero-badges reveal">
+    <div class="badges-row">
+    <div class="badge"><div class="badge-icon" data-icon="google" style="flex:0 0 78px;width:auto;height:78px;flex-direction:column;gap:6px;color:var(--mint)"><svg viewBox="0 0 272 92" style="width:83px;height:auto;fill:currentColor"><path d="M115.75 47.18c0 12.77-9.99 22.18-22.25 22.18s-22.25-9.41-22.25-22.18C71.25 34.32 81.24 25 93.5 25s22.25 9.32 22.25 22.18zm-9.74 0c0-7.98-5.79-13.44-12.51-13.44S80.99 39.2 80.99 47.18c0 7.9 5.79 13.44 12.51 13.44s12.51-5.55 12.51-13.44z"></path><path d="M163.75 47.18c0 12.77-9.99 22.18-22.25 22.18s-22.25-9.41-22.25-22.18c0-12.85 9.99-22.18 22.25-22.18s22.25 9.32 22.25 22.18zm-9.74 0c0-7.98-5.79-13.44-12.51-13.44s-12.51 5.46-12.51 13.44c0 7.9 5.79 13.44 12.51 13.44s12.51-5.55 12.51-13.44z"></path><path d="M209.75 26.34v39.82c0 16.38-9.66 23.07-21.08 23.07-10.75 0-17.22-7.19-19.66-13.07l8.48-3.53c1.51 3.61 5.21 7.87 11.17 7.87 7.31 0 11.84-4.51 11.84-13v-3.19h-.34c-2.18 2.69-6.38 5.04-11.68 5.04-11.09 0-21.25-9.66-21.25-22.09 0-12.52 10.16-22.26 21.25-22.26 5.29 0 9.49 2.35 11.68 4.96h.34v-3.61h9.25zm-8.56 20.92c0-7.81-5.21-13.52-11.84-13.52-6.72 0-12.35 5.71-12.35 13.52 0 7.73 5.63 13.36 12.35 13.36 6.63 0 11.84-5.63 11.84-13.36z"></path><path d="M225 3v65h-9.5V3h9.5z"></path><path d="M262.02 54.48l7.56 5.04c-2.44 3.61-8.32 9.83-18.48 9.83-12.6 0-22.01-9.74-22.01-22.18 0-13.19 9.49-22.18 20.92-22.18 11.51 0 17.14 9.16 18.98 14.11l1.01 2.52-29.65 12.28c2.27 4.45 5.8 6.72 10.75 6.72 4.96 0 8.4-2.44 10.92-6.14zm-23.27-7.98l19.82-8.23c-1.09-2.77-4.37-4.7-8.23-4.7-4.95 0-11.84 4.37-11.59 12.93z"></path><path d="M35.29 41.41V32H67c.31 1.64.47 3.58.47 5.68 0 7.06-1.93 15.79-8.15 22.01-6.05 6.3-13.78 9.66-24.02 9.66C16.32 69.35.36 53.89.36 34.91.36 15.93 16.32.47 35.3.47c10.5 0 17.98 4.12 23.6 9.49l-6.64 6.64c-4.03-3.78-9.49-6.72-16.97-6.72-13.86 0-24.7 11.17-24.7 25.03 0 13.86 10.84 25.03 24.7 25.03 8.99 0 14.11-3.61 17.39-6.89 2.66-2.66 4.41-6.46 5.1-11.65l-22.49.01z"></path></svg><div style="font-size:13px;letter-spacing:0.14em;line-height:1">★★★★★</div></div><span>RATED 4.9 STARS<br>ON GOOGLE</span></div>
+    <div class="badge"><div class="badge-icon" data-icon="amsa"><img src="uploads/icon_AMSA.png" alt="AMSA"></div><span>AMSA CERTIFIED MOVER</span></div>
+    <div class="badge"><div class="badge-icon" data-icon="storage"><img src="uploads/icon_Storage.png" alt="Storage"></div><span>34,000 sq ft<br>Climate storage</span></div>
+    <div class="badge"><div class="badge-icon" data-icon="licensed"><img src="uploads/icon_Certified.png" alt="Licensed"></div><span>Fully licensed<br>&amp; insured</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ INTRO ═══ -->
+<section class="intro" data-screen-label="Intro">
+  <div class="col-text reveal">
+    <div class="eyebrow">The Mastodon way</div>
+    <div class="rule" style="background: var(--g900); margin-top: 14px;"></div>
+    <h2 class="h1">Built on<br>trust &amp;<br>detail.</h2>
+    <p class="body">We're a tight-knit team of professional movers — not a chain, not a franchise. Every job gets a dedicated lead, a written inventory, and the same white-glove care, whether it's a studio in Brighton or a four-bedroom in Wellesley.</p>
+    <p class="body">Founded by JJ Przybylski in 2011 in Wayland, MA, Mastodon now operates out of a 34,000 sq ft warehouse in Westborough, MA.</p>
+    <div class="meta-row">
+      <div><div class="stat-n">14yrs</div><div class="stat-l">In business</div></div>
+      <div><div class="stat-n">34K</div><div class="stat-l">Sq ft storage</div></div>
+      <div><div class="stat-n">5×</div><div class="stat-l">Super Service award</div></div>
+    </div>
+  </div>
+  <div class="col-media reveal">
+    <img src="uploads/crew-loading.jpg" alt="Crew loading day" style="width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:20px;display:block;">
+  </div>
+</section>
+
+<!-- ═══ QUICK LINKS ═══ -->
+<section class="quick3" data-screen-label="Quick Links">
+  <div class="quick3-grid">
+    <a href="about.html" class="q-card reveal">
+      <img class="bg" src="uploads/box-8343a2c6.png" alt="Moving box">
+      <div class="box-inner">
+        <h3>Stress-free moving</h3>
+        <p>Licensed, insured crews who treat your move like it's personal.</p>
+        <div class="arrow-link">Learn more</div>
+      </div>
+    </a>
+    <a href="quote.html" class="q-card on-light reveal">
+      <img class="bg" src="uploads/clipboard-d36b1105.png" alt="Clipboard">
+      <div class="box-inner">
+        <h3>Get an estimate</h3>
+        <p>Fast, easy, and no-surprise — call or request a quote right away.</p>
+        <div class="arrow-link">Get an estimate</div>
+      </div>
+    </a>
+    <a href="#reviews" class="q-card on-light reveal">
+      <img class="bg" src="uploads/stickie-e8a0f1de.png" alt="Post-it note">
+      <div class="box-inner">
+        <h3>Reviews &amp; resources</h3>
+        <p>Real reviews, plus tips and checklists to move like a pro.</p>
+        <div class="arrow-link">Read reviews</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ═══ REVIEWS ═══ -->
+<section class="reviews" id="reviews" data-screen-label="Reviews">
+  <div class="rev-head reveal">
+    <div>
+      <div class="eyebrow" style="color: var(--g700);">Straight from our customers</div>
+      <div class="rule" style="background: var(--g900); margin-top: 14px;"></div>
+      <h2 class="h1">We're top rated<br>for a reason.</h2>
+    </div>
+    <p class="lede">We put our customers first in everything we do. But don't just take our word for it — see what they have to say.</p>
+  </div>
+  <div class="rev-grid">
+    <div class="rev-card reveal">
+      <div class="stars">★★★★★</div>
+      <blockquote>"JJ couldn't have been more attentive to detail, and service was excellent. He is a professional in every sense of the word and I would recommend him and his team highly!"</blockquote>
+      <cite>— Jylian</cite>
+    </div>
+    <div class="rev-card reveal">
+      <div class="stars">★★★★★</div>
+      <blockquote>"They packed what was un-boxed, disassembled furniture, and handled huge pieces with an expertise that could only come from true professionals. Well worth the price!"</blockquote>
+      <cite>— Jim</cite>
+    </div>
+    <div class="rev-card reveal">
+      <div class="stars">★★★★★</div>
+      <blockquote>"We renovated our first floor and worked with Mastodon to move furniture within the house and store some with them. Communication was excellent and the movers were careful, respectful, and had a sense of humor. A pleasure to work with."</blockquote>
+      <cite>— Dana</cite>
+    </div>
+  </div>
+  <div class="rev-actions reveal">
+    <span class="lbl">Check out more reviews</span>
+    <div class="btns">
+      <a href="https://www.yelp.com" class="btn btn-yelp"><img src="uploads/yelp.png" alt="Yelp"></a>
+      <a href="https://www.google.com/maps" class="btn btn-google"><img src="uploads/Google-c46542be.png" alt="Google"></a>
+      <a href="https://www.angi.com" class="btn btn-angi"><img src="uploads/Angi-4df1313a.png" alt="Angi"></a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA ═══ -->
+<section class="cta-strip" data-screen-label="CTA">
+  <div class="reveal">
+    <div class="eyebrow on-dark" style="margin-bottom: 24px;">Ready when you are</div>
+    <h2 class="h1">Let's plan<br>your move.</h2>
+    <p class="lede">Tell us a bit about where you're going. We'll come walk through it with you and put together a real, no-surprise plan.</p>
+    <div class="actions">
+      <a href="quote.html" class="btn btn-primary">Get a free estimate <span class="arrow"></span></a>
+      <a href="tel:7744219004" class="btn cta-phone">Or call (774) 421-9004</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div id="footer-mount"></div>
+
+<!-- Tweaks panel -->
+<button id="tweaks-toggle">Tweaks</button>
+<div id="tweaks">
+  <h4>Tweaks</h4>
+  <div class="tw-row">
+    <label>Color palette</label>
+    <div class="swatches" id="tw-palette"></div>
+  </div>
+  <div class="tw-row">
+    <label>Hero treatment</label>
+    <div class="tw-segments" id="tw-hero">
+      <div class="tw-seg on" data-val="video">Video</div>
+      <div class="tw-seg" data-val="still">Photo</div>
+      <div class="tw-seg" data-val="type">Type</div>
+    </div>
+  </div>
+</div>
+
+<script src="shared/chrome.js"></script>
+<script>
+// ─── Tweaks ────────────────────────────────────────────────
+const TWEAKS = /*EDITMODE-BEGIN*/{
+  "palette": "cream",
+  "hero": "video"
+}/*EDITMODE-END*/;
+
+const PALETTES = {
+  forest: { '--g900': '#112E1D', '--g700': '#2F4B3C', '--mint': '#B8D2B2', '--cream': '#F0EAE5' },
+  midnight: { '--g900': '#0a1410', '--g700': '#1a2a22', '--mint': '#9bc4a2', '--cream': '#EDE6DE' },
+  cream: { '--g900': '#1f3527', '--g700': '#3a5847', '--mint': '#c9dcc1', '--cream': '#F8F3EC' },
+  mono: { '--g900': '#111111', '--g700': '#2a2a2a', '--mint': '#cfcfcf', '--cream': '#F2EFEA' }
+};
+const PALETTE_PREVIEW = {
+  forest: ['#112E1D', '#B8D2B2', '#F0EAE5'],
+  midnight: ['#0a1410', '#9bc4a2', '#EDE6DE'],
+  cream: ['#1f3527', '#c9dcc1', '#F8F3EC'],
+  mono: ['#111111', '#cfcfcf', '#F2EFEA']
+};
+
+function applyPalette(name) {
+  const p = PALETTES[name] || PALETTES.forest;
+  const r = document.documentElement;
+  Object.entries(p).forEach(([k, v]) => r.style.setProperty(k, v));
+}
+function applyHero(mode) {
+  const v = document.querySelector('.hero-video');
+  const still = document.querySelector('.hero-still');
+  const headline = document.querySelector('.hero-headline');
+  if (mode === 'video') { v.style.display = ''; still.style.display = 'none'; }
+  else if (mode === 'still') { v.style.display = 'none'; still.style.display = 'flex'; }
+  else if (mode === 'type') {
+    v.style.display = 'none';
+    still.style.display = 'flex';
+    still.style.background = 'var(--g900)';
+    still.querySelector('.ph-label').style.display = 'none';
+  }
+}
+
+// Build palette swatches
+(function buildPalette() {
+  const mount = document.getElementById('tw-palette');
+  Object.entries(PALETTE_PREVIEW).forEach(([name, colors]) => {
+    const sw = document.createElement('div');
+    sw.className = 'swatch' + (name === TWEAKS.palette ? ' on' : '');
+    sw.dataset.val = name;
+    sw.style.background = `linear-gradient(90deg, ${colors[0]} 0 33%, ${colors[1]} 33% 66%, ${colors[2]} 66% 100%)`;
+    sw.title = name;
+    sw.addEventListener('click', () => {
+      mount.querySelectorAll('.swatch').forEach(s => s.classList.remove('on'));
+      sw.classList.add('on');
+      applyPalette(name);
+      window.parent.postMessage({type:'__edit_mode_set_keys', edits:{palette: name}}, '*');
+    });
+    mount.appendChild(sw);
+  });
+})();
+document.querySelectorAll('#tw-hero .tw-seg').forEach(seg => {
+  seg.addEventListener('click', () => {
+    document.querySelectorAll('#tw-hero .tw-seg').forEach(s => s.classList.remove('on'));
+    seg.classList.add('on');
+    applyHero(seg.dataset.val);
+    window.parent.postMessage({type:'__edit_mode_set_keys', edits:{hero: seg.dataset.val}}, '*');
+  });
+});
+applyPalette(TWEAKS.palette);
+applyHero(TWEAKS.hero);
+// Sync segment selection on load
+document.querySelectorAll('#tw-hero .tw-seg').forEach(s => {
+  s.classList.toggle('on', s.dataset.val === TWEAKS.hero);
+});
+
+// Edit-mode protocol
+window.addEventListener('message', (e) => {
+  if (e.data?.type === '__activate_edit_mode') {
+    document.getElementById('tweaks').classList.add('on');
+    document.getElementById('tweaks-toggle').classList.remove('on');
+  }
+  if (e.data?.type === '__deactivate_edit_mode') {
+    document.getElementById('tweaks').classList.remove('on');
+  }
+});
+window.parent.postMessage({type:'__edit_mode_available'}, '*');
+</script>
+
+</body>
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Mastodon Moving</title>
+<link rel="stylesheet" href="shared/fonts.css">
+<link rel="stylesheet" href="shared/styles.css">
+<style>
+.contact-hero {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  color: var(--cream);
+  padding: calc(var(--nav-h) + 80px) var(--pad-x) clamp(80px, 10vw, 120px);
+}
+.contact-hero .hero-bg { position: absolute; inset: 0; z-index: -1; }
+.contact-hero .hero-bg img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 0; display: block; }
+.contact-hero .hero-bg::after { content: ''; position: absolute; inset: 0; background: rgba(17,46,29,0.7); }
+.contact-hero .container { max-width: var(--maxw); margin: 0 auto; }
+.contact-hero .eyebrow { color: var(--mint); }
+.contact-hero .h-display { color: var(--cream); margin-top: 18px; }
+.contact-hero .lede { color: rgba(240,234,229,0.8) !important; }
+
+.contact-grid {
+  background: var(--cream);
+  color: var(--g900);
+  padding: 0 var(--pad-x) clamp(80px, 10vw, 120px);
+}
+.contact-grid-inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: clamp(40px, 6vw, 96px);
+  padding-top: 80px;
+  border-top: 2px solid rgba(17,46,29,0.15);
+}
+.contact-info-block { margin-bottom: 48px; }
+.contact-info-block .eyebrow.on-dark { margin-bottom: 14px; }
+.contact-info-block .big {
+  font-family: 'SohoProCond', sans-serif;
+  font-weight: 700;
+  font-size: clamp(28px, 3vw, 38px);
+  line-height: 1.05;
+  text-transform: uppercase;
+  letter-spacing: -0.005em;
+}
+.contact-info-block .big a { color: var(--g900); }
+.contact-info-block .big a:hover { color: var(--g500); }
+.contact-info-block p { font-size: 15px; line-height: 1.55; color: var(--g700); margin-top: 8px; }
+
+/* Light form overrides */
+.contact-grid .field label { color: var(--g500); }
+.contact-grid .field input, .contact-grid .field select, .contact-grid .field textarea { border-bottom-color: rgba(17,46,29,0.3); color: var(--g900); }
+.contact-grid .field input::placeholder, .contact-grid .field textarea::placeholder { color: rgba(17,46,29,0.35); }
+.contact-grid .field input:focus, .contact-grid .field textarea:focus, .contact-grid .field select:focus { border-color: var(--g900); }
+
+/* ─── Service areas (structure from original site) ─── */
+.areas { background: var(--white); padding: 24px var(--pad-x) clamp(80px, 10vw, 120px); }
+.areas-inner { max-width: var(--maxw); margin: 0 auto; display: grid; grid-template-columns: 1fr 1.4fr; gap: clamp(40px, 6vw, 96px); align-items: start; }
+.areas-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 32px; }
+.areas-list li { padding: 13px 0; border-bottom: 1px solid rgba(17,46,29,0.15); font-size: 15px; letter-spacing: 0.02em; color: var(--g700); }
+@media (max-width: 880px) { .areas-inner { grid-template-columns: 1fr; } .areas-list { grid-template-columns: 1fr 1fr; } }
+
+.map-strip {
+  background: var(--white);
+  padding: 0 var(--pad-x) 0;
+}
+.map-head { max-width: var(--maxw); margin: 0 auto 32px; display: flex; align-items: baseline; gap: 18px; flex-wrap: wrap; }
+.map-head h2 { font-family: 'SohoProCond', sans-serif; font-weight: 700; font-size: clamp(28px, 3vw, 40px); text-transform: uppercase; line-height: 1; }
+.map-head .loc { font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--g500); }
+.map-ph {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  border-radius: 20px;
+  aspect-ratio: 21/9;
+  position: relative;
+  overflow: hidden;
+}
+.map-ph .ph { width: 100%; height: 100%; }
+</style>
+</head>
+<body data-page="contact">
+
+<div id="nav-mount"></div>
+
+<main>
+
+<section class="contact-hero" data-screen-label="Contact Hero">
+  <div class="hero-bg"><img src="uploads/office-move-crew.jpg" alt="Mastodon Moving crew on a commercial move"></div>
+  <div class="container reveal">
+    <h1 class="h-display">Talk<br><em style="font-style:normal;color:var(--mint);">to us.</em></h1>
+    <p class="lede" style="margin-top: 32px;">A real person picks up the phone Monday through Saturday, 8–5. Or send us a note — we'll get back to you within a business day.</p>
+  </div>
+</section>
+
+<section class="contact-grid" data-screen-label="Contact Info">
+  <div class="contact-grid-inner">
+    <div class="reveal">
+      <div class="contact-info-block">
+        <div class="eyebrow">Phone</div>
+        <div class="big"><a href="tel:7744219004">(774) 421-9004</a></div>
+        <p>Mon–Sat, 8am–5pm</p>
+      </div>
+      <div class="contact-info-block">
+        <div class="eyebrow">Email</div>
+        <div class="big"><a href="mailto:info@mastodonmoving.com">info@<br>mastodonmoving.com</a></div>
+      </div>
+      <div class="contact-info-block">
+        <div class="eyebrow">Social</div>
+        <div class="big"><a href="https://www.facebook.com/mastodonmoving">Facebook</a> &amp; <a href="https://www.instagram.com/mastodonmoving">Instagram</a></div>
+      </div>
+      <div class="contact-info-block">
+        <div class="eyebrow">Visit</div>
+        <div class="big">191 Flanders Rd<br>Westborough, MA 01581</div>
+        <p>34,000 sq ft warehouse &amp; office</p>
+      </div>
+      <div class="contact-info-block">
+        <div class="eyebrow">Credentials</div>
+        <p style="font-size: 13px;">MC# 755234 · DOT# 2174430<br>AMSA Certified Mover<br>Fully licensed &amp; insured</p>
+      </div>
+    </div>
+
+    <form class="reveal" onsubmit="event.preventDefault(); alert('Thanks — we\\'ll be in touch within a business day.'); this.reset();">
+      <div class="form-row">
+        <div class="field"><label>First name</label><input type="text" required placeholder="First name"></div>
+        <div class="field"><label>Last name</label><input type="text" required placeholder="Last name"></div>
+      </div>
+      <div class="form-row">
+        <div class="field"><label>Email</label><input type="email" required placeholder="you@email.com"></div>
+        <div class="field"><label>Phone</label><input type="tel" placeholder="(774) ..."></div>
+      </div>
+      <div class="form-row full">
+        <div class="field">
+          <label>What can we help with?</label>
+          <select>
+            <option>Free moving estimate</option>
+            <option>Storage inquiry</option>
+            <option>Commercial / office move</option>
+            <option>Custom crating</option>
+            <option>Property manager / contractor</option>
+            <option>General question</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row full">
+        <div class="field">
+          <label>Tell us about your move</label>
+          <textarea placeholder="Where are you moving from / to, when, and anything we should know..."></textarea>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-dark" style="margin-top: 16px;">Send message <span class="arrow"></span></button>
+    </form>
+  </div>
+</section>
+
+<section class="map-strip" data-screen-label="Map" style="padding-top: clamp(60px, 8vw, 96px); padding-bottom: 24px;">
+  <div class="map-head reveal">
+    <h2>Headquarters</h2>
+    <span class="loc">191 Flanders Rd · Westborough, MA</span>
+  </div>
+  <div class="map-ph">
+    <iframe src="https://www.google.com/maps?q=191+Flanders+Rd,+Westborough,+MA+01581&output=embed" width="100%" height="100%" style="border:0;display:block;" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mastodon Moving headquarters map"></iframe>
+  </div>
+</section>
+
+<section class="areas" data-screen-label="Service Areas">
+  <div class="areas-inner">
+    <div class="reveal">
+      <div class="eyebrow">Service areas</div>
+      <div class="rule" style="background: var(--g900); margin-top: 14px;"></div>
+      <h2 class="h2">Massachusetts<br>&amp; beyond.</h2>
+      <p class="body" style="margin-top: 24px;">Don't see your home town listed? No worries — as local and long-distance movers, we cover the <em>entire</em> Greater Boston area, the state, and beyond.</p>
+    </div>
+    <ul class="areas-list reveal">
+      <li>Wayland</li>
+      <li>Boston</li>
+      <li>Weston</li>
+      <li>Sudbury</li>
+      <li>Newton</li>
+      <li>Wellesley</li>
+      <li>Lincoln</li>
+      <li>Sherborn</li>
+      <li>Brookline</li>
+      <li>Dover</li>
+      <li>Concord</li>
+      <li>Acton</li>
+      <li>Natick</li>
+      <li>Framingham</li>
+      <li>Chestnut Hill</li>
+      <li>Lexington</li>
+      <li>Westborough</li>
+      <li>Cambridge</li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<div id="footer-mount"></div>
+<script src="shared/chrome.js"></script>
+</body>
+</html>

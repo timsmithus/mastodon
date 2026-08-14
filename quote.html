@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Estimate — Mastodon Moving</title>
+<link rel="stylesheet" href="shared/fonts.css">
+<link rel="stylesheet" href="shared/styles.css">
+<style>
+.quote-page {
+  background: var(--g900);
+  color: var(--cream);
+  min-height: 100vh;
+  padding: calc(var(--nav-h) + 80px) var(--pad-x) clamp(80px, 10vw, 120px);
+}
+.quote-grid {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: clamp(40px, 6vw, 96px);
+}
+
+.quote-side .h-display { margin-top: 14px; max-width: 10ch; line-height: 0.92; }
+.quote-side .lede { color: rgba(240,234,229,0.78); margin-top: 32px; max-width: 36ch; }
+.quote-perks {
+  list-style: none;
+  margin-top: 56px;
+  padding-top: 32px;
+  border-top: 2px solid rgba(240,234,229,0.15);
+}
+.quote-perks li {
+  padding: 14px 0;
+  border-bottom: 2px solid rgba(240,234,229,0.15);
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  font-size: 14px;
+}
+.quote-perks li::before {
+  content: '+';
+  display: block;
+  width: 14px;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1;
+  color: var(--mint);
+  flex-shrink: 0;
+  text-align: center;
+}
+
+.form-card {
+  background: rgba(240,234,229,0.04);
+  border: 1px solid rgba(240,234,229,0.15);
+  padding: clamp(32px, 4vw, 56px);
+}
+.form-card .step-counter {
+  font-family: 'Roboto', monospace;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  color: var(--mint);
+  margin-bottom: 8px;
+}
+.form-card h2 {
+  font-family: 'SohoProCond', sans-serif;
+  font-weight: 700;
+  font-size: clamp(28px, 3vw, 40px);
+  text-transform: uppercase;
+  line-height: 1;
+  margin-bottom: 36px;
+}
+.progress-bar {
+  height: 2px;
+  background: rgba(240,234,229,0.15);
+  margin-bottom: 36px;
+  position: relative;
+}
+.progress-fill {
+  position: absolute; left: 0; top: 0;
+  height: 100%;
+  background: var(--mint);
+  transition: width .4s ease;
+}
+
+.choice-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.choice {
+  padding: 18px 20px;
+  background: rgba(240,234,229,0.04);
+  border: 1px solid rgba(240,234,229,0.18);
+  cursor: pointer;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  transition: all .15s;
+  text-align: left;
+}
+.choice:hover { border-color: rgba(240,234,229,0.4); }
+.choice.on { background: var(--mint); color: var(--g900); border-color: var(--mint); }
+
+.step { display: none; }
+.step.on { display: block; }
+
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(240,234,229,0.15);
+}
+.btn-back {
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(240,234,229,0.6);
+  background: none;
+  padding: 10px 0;
+}
+.btn-back:hover { color: var(--cream); }
+.btn-back.hidden { visibility: hidden; }
+
+.success {
+  text-align: center;
+  padding: 40px 0;
+}
+.success h3 {
+  font-family: 'SohoProCond', sans-serif;
+  font-weight: 700;
+  font-size: clamp(36px, 4vw, 56px);
+  text-transform: uppercase;
+  line-height: 1;
+  margin-bottom: 24px;
+}
+.success p { color: rgba(240,234,229,0.78); max-width: 40ch; margin: 0 auto; }
+
+@media (max-width: 880px) {
+  .quote-grid { grid-template-columns: 1fr; }
+  .choice-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body data-page="quote">
+
+<div id="nav-mount"></div>
+
+<main>
+
+<section class="quote-page" data-screen-label="Quote">
+  <div class="quote-grid">
+
+    <aside class="quote-side reveal">
+      <div class="eyebrow on-dark">Free estimate</div>
+      <h1 class="h-display">Tell us<br>about<br><em style="color: var(--mint); font-style: normal;">your move.</em></h1>
+      <p class="lede">Five questions, two minutes. We'll follow up within a business day to set up a walkthrough and a binding written estimate.</p>
+      <ul class="quote-perks">
+        <li>Free, no-pressure walkthrough</li>
+        <li>Binding written estimate — no surprises</li>
+        <li>Real human responses, not auto-replies</li>
+        <li>34,000 sq ft of secure storage if needed</li>
+      </ul>
+    </aside>
+
+    <div class="form-card reveal">
+      <div class="step-counter"><span id="step-num">01</span> of 05</div>
+      <div class="progress-bar"><div class="progress-fill" id="progress" style="width: 20%"></div></div>
+
+      <!-- Step 1: type -->
+      <div class="step on" data-step="1">
+        <h2>What kind of<br>move is it?</h2>
+        <div class="choice-grid">
+          <button class="choice" data-field="type" data-val="Local residential">Local residential</button>
+          <button class="choice" data-field="type" data-val="Long distance">Long distance</button>
+          <button class="choice" data-field="type" data-val="Commercial / office">Commercial / office</button>
+          <button class="choice" data-field="type" data-val="Storage only">Storage only</button>
+        </div>
+      </div>
+
+      <!-- Step 2: size -->
+      <div class="step" data-step="2">
+        <h2>How big is<br>the move?</h2>
+        <div class="choice-grid">
+          <button class="choice" data-field="size" data-val="Studio / 1BR">Studio / 1BR</button>
+          <button class="choice" data-field="size" data-val="2 BR">2 BR</button>
+          <button class="choice" data-field="size" data-val="3 BR">3 BR</button>
+          <button class="choice" data-field="size" data-val="4+ BR">4+ BR</button>
+          <button class="choice" data-field="size" data-val="Office">Office</button>
+          <button class="choice" data-field="size" data-val="Not sure">Not sure</button>
+        </div>
+      </div>
+
+      <!-- Step 3: locations -->
+      <div class="step" data-step="3">
+        <h2 id="step3-title">Where are<br>we going?</h2>
+        <div class="form-row" id="address-row">
+          <div class="field"><label>Moving from</label><input type="text" id="from" placeholder="City or zip"></div>
+          <div class="field"><label>Moving to</label><input type="text" id="to" placeholder="City or zip"></div>
+        </div>
+        <div class="form-row full">
+          <div class="field"><label id="date-label">Approximate move date</label><input type="text" id="date" placeholder="e.g. Late June, or 6/24"></div>
+        </div>
+      </div>
+
+      <!-- Step 4: services -->
+      <div class="step" data-step="4">
+        <h2>What additional<br>services do you<br>anticipate needing?</h2>
+        <div class="choice-grid" id="extras">
+          <button class="choice" data-extra="Packing">Packing</button>
+          <button class="choice" data-extra="Unpacking">Unpacking</button>
+          <button class="choice" data-extra="Storage">Storage</button>
+          <button class="choice" data-extra="Custom crating">Custom crating</button>
+          <button class="choice" data-extra="Piano / specialty">Piano / specialty</button>
+          <button class="choice" data-extra="None">None of these</button>
+        </div>
+      </div>
+
+      <!-- Step 5: contact -->
+      <div class="step" data-step="5">
+        <h2>How can we<br>reach you?</h2>
+        <div class="form-row">
+          <div class="field"><label>Name</label><input type="text" id="name" required placeholder="Your name"></div>
+          <div class="field"><label>Phone</label><input type="tel" id="phone" placeholder="(774) ..."></div>
+        </div>
+        <div class="form-row full">
+          <div class="field"><label>Email</label><input type="email" id="email" required placeholder="you@email.com"></div>
+        </div>
+        <div class="form-row full">
+          <div class="field"><label>Anything else?</label><textarea id="notes" placeholder="Special items, access notes, questions..."></textarea></div>
+        </div>
+      </div>
+
+      <!-- Success -->
+      <div class="step" data-step="6">
+        <div class="success">
+          <h3>Got it.<br>Talk soon.</h3>
+          <p>We'll be in touch within a business day to schedule your walkthrough. If it's urgent, ring us at <a href="tel:7744219004" style="color:var(--mint);">(774) 421-9004</a>.</p>
+        </div>
+      </div>
+
+      <div class="form-actions" id="actions">
+        <button class="btn-back hidden" id="back">← Back</button>
+        <button class="btn btn-primary" id="next">Next <span class="arrow"></span></button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<div id="footer-mount"></div>
+<script src="shared/chrome.js"></script>
+<script>
+(function() {
+  const state = { step: 1, type: '', size: '', extras: new Set() };
+  const totalSteps = 5;
+  const nextBtn = document.getElementById('next');
+
+  function isStorageOnly() { return state.type === 'Storage only'; }
+
+  function isValid() {
+    switch (state.step) {
+      case 1: return !!state.type;
+      case 2: return !!state.size;
+      case 3: return isStorageOnly() ||
+                     (document.getElementById('from').value.trim().length > 0 &&
+                      document.getElementById('to').value.trim().length > 0);
+      case 4: return state.extras.size > 0;
+      case 5: return document.getElementById('name').value.trim().length > 0 &&
+                     document.getElementById('email').value.trim().length > 0;
+      default: return true;
+    }
+  }
+
+  function updateStep3UI() {
+    const storage = isStorageOnly();
+    document.getElementById('address-row').style.display = storage ? 'none' : '';
+    document.getElementById('step3-title').innerHTML = storage ? 'When do you<br>need storage?' : 'Where are<br>we going?';
+    document.getElementById('date-label').textContent = storage ? 'Approximate start date' : 'Approximate move date';
+  }
+
+  function updateNext() {
+    const valid = isValid();
+    nextBtn.disabled = !valid;
+    nextBtn.style.opacity = valid ? '' : '0.35';
+    nextBtn.style.cursor = valid ? '' : 'not-allowed';
+    nextBtn.style.transform = valid ? '' : 'none';
+  }
+
+  function showStep(n) {
+    document.querySelectorAll('.step').forEach(s => s.classList.toggle('on', +s.dataset.step === n));
+    document.getElementById('step-num').textContent = String(Math.min(n, totalSteps)).padStart(2,'0');
+    document.getElementById('progress').style.width = (Math.min(n, totalSteps) / totalSteps * 100) + '%';
+    document.getElementById('back').classList.toggle('hidden', n === 1 || n > totalSteps);
+    if (n > totalSteps) {
+      document.getElementById('actions').style.display = 'none';
+    } else {
+      document.getElementById('actions').style.display = '';
+      nextBtn.innerHTML = (n === totalSteps ? 'Submit' : 'Next') + ' <span class="arrow"></span>';
+      if (n === 3) updateStep3UI();
+      updateNext();
+    }
+  }
+
+  // Single-choice buttons
+  document.querySelectorAll('.choice[data-field]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const f = btn.dataset.field;
+      document.querySelectorAll(`.choice[data-field="${f}"]`).forEach(b => b.classList.remove('on'));
+      btn.classList.add('on');
+      state[f] = btn.dataset.val;
+      updateNext();
+    });
+  });
+
+  // Multi-choice extras
+  document.querySelectorAll('#extras .choice').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const v = btn.dataset.extra;
+      if (v === 'None') {
+        document.querySelectorAll('#extras .choice').forEach(b => b.classList.remove('on'));
+        state.extras.clear();
+      } else {
+        document.querySelector('#extras .choice[data-extra="None"]').classList.remove('on');
+      }
+      btn.classList.toggle('on');
+      if (state.extras.has(v)) state.extras.delete(v); else state.extras.add(v);
+      updateNext();
+    });
+  });
+
+  // Text input steps
+  ['from', 'to', 'name', 'email'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('input', updateNext);
+  });
+
+  nextBtn.addEventListener('click', () => {
+    if (!isValid()) return;
+    state.step = Math.min(state.step + 1, totalSteps + 1);
+    showStep(state.step);
+  });
+  document.getElementById('back').addEventListener('click', () => {
+    state.step = Math.max(state.step - 1, 1);
+    showStep(state.step);
+  });
+
+  showStep(1);
+})();
+</script>
+</body>
+</html>
