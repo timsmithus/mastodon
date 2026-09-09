@@ -88,9 +88,9 @@
 <main>
 
 <section class="contact-hero" data-screen-label="Contact Hero">
-  <div class="hero-bg"><img src="uploads/office-move-crew.jpg" alt="Mastodon Moving crew on a commercial move"></div>
+  <div class="hero-bg"><img src="uploads/office-move-crew.jpg" alt="Mastodon Moving crew relocating an office"></div>
   <div class="container reveal">
-    <h1 class="h-display">Talk<br><em style="font-style:normal;color:var(--mint);">to us.</em></h1>
+    <h1 class="h-display">Moving?<br><em style="font-style:normal;color:var(--mint);">Let's talk.</em></h1>
     <p class="lede" style="margin-top: 32px;">A real person picks up the phone Monday through Saturday, 8–5. Or send us a note — we'll get back to you within a business day.</p>
   </div>
 </section>
@@ -129,7 +129,7 @@
       </div>
       <div class="form-row">
         <div class="field"><label>Email</label><input type="email" required placeholder="you@email.com"></div>
-        <div class="field"><label>Phone</label><input type="tel" placeholder="(774) ..."></div>
+        <div class="field"><label>Phone</label><input type="tel" id="contact-phone" placeholder="(555) 555-5555"></div>
       </div>
       <div class="form-row full">
         <div class="field">
@@ -200,5 +200,19 @@
 
 <div id="footer-mount"></div>
 <script src="shared/chrome.js"></script>
+<script>
+(function(){
+  const el = document.getElementById('contact-phone');
+  if (!el) return;
+  el.addEventListener('input', () => {
+    const d = el.value.replace(/\D/g, '').slice(0, 10);
+    let out = d;
+    if (d.length > 6) out = `(${d.slice(0,3)}) ${d.slice(3,6)}-${d.slice(6)}`;
+    else if (d.length > 3) out = `(${d.slice(0,3)}) ${d.slice(3)}`;
+    else if (d.length > 0) out = `(${d}`;
+    el.value = out;
+  });
+})();
+</script>
 </body>
 </html>

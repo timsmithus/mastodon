@@ -13,21 +13,6 @@
   min-height: 100vh;
   padding: calc(var(--nav-h) + 80px) var(--pad-x) clamp(80px, 10vw, 120px);
 }
-.email-bar {
-  max-width: var(--maxw);
-  margin: 0 auto clamp(40px, 4vw, 64px);
-  padding-bottom: clamp(28px, 3vw, 40px);
-  border-bottom: 2px solid rgba(240,234,229,0.15);
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 8px 20px;
-}
-.email-bar .label { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(240,234,229,0.6); }
-.email-bar a { font-family: 'SohoProCond', sans-serif; font-weight: 700; font-size: clamp(24px, 2.6vw, 34px); text-transform: uppercase; letter-spacing: 0.01em; color: var(--cream); line-height: 1; }
-.email-bar a:hover { color: var(--mint); }
-.email-bar .note { font-size: 14px; color: rgba(240,234,229,0.6); margin-left: auto; }
-@media (max-width: 700px) { .email-bar .note { margin-left: 0; } }
 .quote-grid {
   max-width: var(--maxw);
   margin: 0 auto;
@@ -186,18 +171,12 @@
 <main>
 
 <section class="quote-page" data-screen-label="Quote">
-  <div class="email-bar reveal">
-    <span class="label">Email us</span>
-    <a href="mailto:info@mastodonmoving.com">info@mastodonmoving.com</a>
-    <span class="note">Questions? Just send us a note — a real person answers.</span>
-  </div>
-
   <div class="quote-grid">
 
     <aside class="quote-side reveal">
       <div class="eyebrow on-dark">Get a quote</div>
       <h1 class="h-display">Tell us<br>about<br><em style="color: var(--mint); font-style: normal;">your move.</em></h1>
-      <p class="lede">Or fill out the form — five questions, two minutes.</p>
+      <p class="lede">Five questions, two minutes.</p>
       <p class="lede" style="margin-top: 14px;"> We'll follow up within a business day to set up a walkthrough and a binding written estimate.</p>
       <ul class="quote-perks">
         <li>Free, no-pressure walkthrough</li>
@@ -273,7 +252,7 @@
         <h2>How can we<br>reach you?</h2>
         <div class="form-row">
           <div class="field"><label>Name</label><input type="text" id="name" required placeholder="Your name"></div>
-          <div class="field"><label>Phone</label><input type="tel" id="phone" placeholder="(774) 421-9004"></div>
+          <div class="field"><label>Phone</label><input type="tel" id="phone" placeholder="(555) 555-5555"></div>
         </div>
         <div class="form-row full">
           <div class="field"><label>Email</label><input type="email" id="email" required placeholder="you@email.com"></div>
