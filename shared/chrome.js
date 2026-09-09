@@ -29,8 +29,13 @@
           <a href="tel:7744219004" class="nav-phone">(774) 421-9004</a>
           <a href="quote.html" class="nav-cta">Get a Quote</a>
         </div>
-        <button class="nav-mobile-toggle" aria-label="Menu">Menu</button>
+        <button class="nav-mobile-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-drawer"><span></span><span></span><span></span></button>
       </nav>
+      <div class="nav-drawer" id="nav-drawer">
+        ${NAV_LINKS.map(l => `<a href="${l.href}" class="${l.key === current ? 'active' : ''}">${l.label}</a>`).join('')}
+        <a href="tel:7744219004" class="drawer-phone">(774) 421-9004</a>
+        <a href="quote.html" class="drawer-cta">GET A QUOTE</a>
+      </div>
     `;
   }
 
@@ -82,6 +87,19 @@
     const footMount = document.getElementById('footer-mount');
     if (navMount) navMount.outerHTML = buildNav(current);
     if (footMount) footMount.outerHTML = buildFooter();
+
+    const toggle = document.querySelector('.nav-mobile-toggle');
+    const drawer = document.getElementById('nav-drawer');
+    if (toggle && drawer) {
+      const setOpen = (open) => {
+        drawer.classList.toggle('open', open);
+        toggle.setAttribute('aria-expanded', String(open));
+      };
+      toggle.addEventListener('click', () => setOpen(!drawer.classList.contains('open')));
+      drawer.addEventListener('click', e => { if (e.target.tagName === 'A') setOpen(false); });
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') setOpen(false); });
+      window.addEventListener('resize', () => { if (window.innerWidth > 880) setOpen(false); });
+    }
 
     // Reveal on scroll
     const io = new IntersectionObserver((entries) => {
