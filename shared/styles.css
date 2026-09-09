@@ -140,13 +140,15 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
 .nav-cta {
   background: var(--mint);
   color: var(--g900) !important;
-  padding: 11px 20px;
+  padding: 13px 24px;
   letter-spacing: 0.14em !important;
   font-weight: 700 !important;
+  font-size: 13px !important;
   border-radius: 8px;
-  transition: background .2s;
+  box-shadow: 0 7px 18px rgba(17,46,29,0.3);
+  transition: background .2s, box-shadow .2s;
 }
-.nav-cta:hover { background: var(--cream) !important; }
+.nav-cta:hover { background: var(--cream) !important; box-shadow: 0 12px 26px rgba(17,46,29,0.38); }
 
 .nav-mobile-toggle { display: none; }
 
@@ -168,16 +170,18 @@ main { padding-top: var(--nav-h); }
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  padding: 16px 28px;
-  font-size: 12px;
+  padding: 20px 34px;
+  font-size: 14px;
   font-weight: 700;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   border-radius: 8px;
-  transition: background .2s, color .2s, transform .2s;
+  box-shadow: 0 10px 24px rgba(17,46,29,0.26), 0 2px 5px rgba(17,46,29,0.18);
+  transition: background .2s, color .2s, transform .2s, box-shadow .2s;
   white-space: nowrap;
 }
-.btn:hover { transform: translateY(-1px); }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 18px 36px rgba(17,46,29,0.34), 0 3px 8px rgba(17,46,29,0.2); }
+.btn:active { transform: translateY(0); box-shadow: 0 4px 10px rgba(17,46,29,0.26); }
 .btn-primary { background: var(--mint); color: var(--g900); }
 .btn-primary:hover { background: var(--cream); }
 .btn-dark { background: var(--g900); color: var(--cream); }
@@ -185,13 +189,16 @@ main { padding-top: var(--nav-h); }
 .btn-ghost {
   background: transparent;
   color: var(--cream);
-  border: 1px solid rgba(240,234,229,0.4);
+  border: 2px solid rgba(240,234,229,0.55);
+  box-shadow: 0 8px 22px rgba(0,0,0,0.24);
 }
-.btn-ghost:hover { background: rgba(240,234,229,0.08); border-color: var(--cream); }
+.btn-ghost:hover { background: rgba(240,234,229,0.1); border-color: var(--cream); }
 .btn-ghost.on-light {
   color: var(--g900);
-  border-color: rgba(17,46,29,0.3);
+  border-color: rgba(17,46,29,0.45);
 }
+.btn.cta-phone, .btn.btn-text, .btn.btn-link { box-shadow: none; }
+.btn.cta-phone:hover, .btn.btn-text:hover, .btn.btn-link:hover { box-shadow: none; }
 .btn-ghost.on-light:hover { background: rgba(17,46,29,0.04); border-color: var(--g900); }
 
 .btn .arrow {

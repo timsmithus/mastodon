@@ -27,7 +27,7 @@
         <div class="nav-links">
           ${links}
           <a href="tel:7744219004" class="nav-phone">(774) 421-9004</a>
-          <a href="quote.html" class="nav-cta">Free Estimate</a>
+          <a href="quote.html" class="nav-cta">Get a Quote</a>
         </div>
         <button class="nav-mobile-toggle" aria-label="Menu">Menu</button>
       </nav>
@@ -57,7 +57,7 @@
             <ul>
               <li><a href="about.html">About</a></li>
               <li><a href="contact.html">Contact</a></li>
-              <li><a href="quote.html">Free Estimate</a></li>
+              <li><a href="quote.html">Get a Quote</a></li>
             </ul>
           </div>
           <div>

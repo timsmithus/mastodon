@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Free Estimate — Mastodon Moving</title>
+<title>Request a Quote — Mastodon Moving</title>
 <link rel="stylesheet" href="shared/fonts.css">
 <link rel="stylesheet" href="shared/styles.css">
 <style>
@@ -13,6 +13,21 @@
   min-height: 100vh;
   padding: calc(var(--nav-h) + 80px) var(--pad-x) clamp(80px, 10vw, 120px);
 }
+.email-bar {
+  max-width: var(--maxw);
+  margin: 0 auto clamp(40px, 4vw, 64px);
+  padding-bottom: clamp(28px, 3vw, 40px);
+  border-bottom: 2px solid rgba(240,234,229,0.15);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 20px;
+}
+.email-bar .label { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(240,234,229,0.6); }
+.email-bar a { font-family: 'SohoProCond', sans-serif; font-weight: 700; font-size: clamp(24px, 2.6vw, 34px); text-transform: uppercase; letter-spacing: 0.01em; color: var(--cream); line-height: 1; }
+.email-bar a:hover { color: var(--mint); }
+.email-bar .note { font-size: 14px; color: rgba(240,234,229,0.6); margin-left: auto; }
+@media (max-width: 700px) { .email-bar .note { margin-left: 0; } }
 .quote-grid {
   max-width: var(--maxw);
   margin: 0 auto;
@@ -50,10 +65,26 @@
 }
 
 .form-card {
+  position: relative;
+  overflow: hidden;
   background: rgba(240,234,229,0.04);
   border: 1px solid rgba(240,234,229,0.15);
   padding: clamp(32px, 4vw, 56px);
 }
+.form-card::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0;
+  width: 78%;
+  aspect-ratio: 1242 / 726;
+  background: url('uploads/mastodon-mark.png') no-repeat center bottom / contain;
+  opacity: 0.022;
+  pointer-events: none;
+  z-index: 0;
+}
+.form-card > * { position: relative; z-index: 1; }
 .form-card .step-counter {
   font-family: 'Roboto', monospace;
   font-size: 11px;
@@ -98,6 +129,11 @@
   transition: all .15s;
   text-align: left;
 }
+.choice { display: flex; align-items: center; gap: 14px; }
+.choice .c-icon { width: 22px; height: 22px; flex-shrink: 0; color: var(--mint); transition: color .2s; }
+.choice .c-icon svg { width: 100%; height: 100%; display: block; }
+.choice.on .c-icon { color: var(--g900); }
+.choice-hint { font-size: 13px; color: rgba(240,234,229,0.55); margin: -8px 0 24px; }
 .choice:hover { border-color: rgba(240,234,229,0.4); }
 .choice.on { background: var(--mint); color: var(--g900); border-color: var(--mint); }
 
@@ -150,12 +186,19 @@
 <main>
 
 <section class="quote-page" data-screen-label="Quote">
+  <div class="email-bar reveal">
+    <span class="label">Email us</span>
+    <a href="mailto:info@mastodonmoving.com">info@mastodonmoving.com</a>
+    <span class="note">Questions? Just send us a note — a real person answers.</span>
+  </div>
+
   <div class="quote-grid">
 
     <aside class="quote-side reveal">
-      <div class="eyebrow on-dark">Free estimate</div>
+      <div class="eyebrow on-dark">Get a quote</div>
       <h1 class="h-display">Tell us<br>about<br><em style="color: var(--mint); font-style: normal;">your move.</em></h1>
-      <p class="lede">Five questions, two minutes. We'll follow up within a business day to set up a walkthrough and a binding written estimate.</p>
+      <p class="lede">Or fill out the form — five questions, two minutes.</p>
+      <p class="lede" style="margin-top: 14px;"> We'll follow up within a business day to set up a walkthrough and a binding written estimate.</p>
       <ul class="quote-perks">
         <li>Free, no-pressure walkthrough</li>
         <li>Binding written estimate — no surprises</li>
@@ -172,23 +215,30 @@
       <div class="step on" data-step="1">
         <h2>What kind of<br>move is it?</h2>
         <div class="choice-grid">
-          <button class="choice" data-field="type" data-val="Local residential">Local residential</button>
-          <button class="choice" data-field="type" data-val="Long distance">Long distance</button>
-          <button class="choice" data-field="type" data-val="Commercial / office">Commercial / office</button>
-          <button class="choice" data-field="type" data-val="Storage only">Storage only</button>
+          <button class="choice" data-field="type" data-val="Local residential"><span class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg></span><span class="c-label">Local residential</span></button>
+          <button class="choice" data-field="type" data-val="Long distance"><span class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17h11V7H3z"/><path d="M14 11h4l3 3v3h-7z"/><circle cx="7" cy="19" r="1.6"/><circle cx="17.5" cy="19" r="1.6"/></svg></span><span class="c-label">Long distance</span></button>
+          <button class="choice" data-field="type" data-val="Commercial / office"><span class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="1"/><path d="M9 7h2M13 7h2M9 11h2M13 11h2M9 15h2M13 15h2"/></svg></span><span class="c-label">Commercial / office</span></button>
+          <button class="choice" data-field="type" data-val="Storage only"><span class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9l8-5 8 5v11H4z"/><path d="M8 20v-6h8v6"/><path d="M8 17h8"/></svg></span><span class="c-label">Storage only</span></button>
         </div>
       </div>
 
       <!-- Step 2: size -->
       <div class="step" data-step="2">
-        <h2>How big is<br>the move?</h2>
-        <div class="choice-grid">
-          <button class="choice" data-field="size" data-val="Studio / 1BR">Studio / 1BR</button>
-          <button class="choice" data-field="size" data-val="2 BR">2 BR</button>
-          <button class="choice" data-field="size" data-val="3 BR">3 BR</button>
-          <button class="choice" data-field="size" data-val="4+ BR">4+ BR</button>
-          <button class="choice" data-field="size" data-val="Office">Office</button>
-          <button class="choice" data-field="size" data-val="Not sure">Not sure</button>
+        <h2 id="step2-title">How big is<br>the move?</h2>
+        <div class="choice-grid" id="size-grid-home">
+          <button class="choice" data-field="size" data-val="Studio / 1BR"><span class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 13l4-4 4 4v7H8z"/><path d="M11 20v-3.5h2V20"/></svg></span><span class="c-label">Studio / 1BR</span></button>
+          <button class="choice" data-field="size" data-val="2 BR"><span class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l8-5 8 5v8H4z"/><path d="M10.5 20v-4h3v4"/></svg></span><span class="c-label">2 BR</span></button>
+          <button class="choice" data-field="size" data-val="3 BR"><span class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l7-5 7 5v11H5z"/><path d="M5 14h14"/><path d="M10.5 20v-3.5h3V20"/></svg></span><span class="c-label">3 BR</span></button>
+          <button class="choice" data-field="size" data-val="4+ BR"><span class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l6-4 6 4v12H3z"/><path d="M15 13l3-2.5 3 2.5v7h-6"/><path d="M3 13h12"/><path d="M7.7 20v-3.5h2.6V20"/></svg></span><span class="c-label">4+ BR</span></button>
+          <button class="choice" data-field="size" data-val="Office"><span class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="1"/><path d="M8 8h2M14 8h2M8 12h2M14 12h2M10 20v-4h4v4"/></svg></span><span class="c-label">Office</span></button>
+          <button class="choice" data-field="size" data-val="Not sure"><span class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.6 2.6 0 1 1 3.6 2.4c-.7.3-1.1.9-1.1 1.7v.4"/><path d="M12 17.5v.01"/></svg></span><span class="c-label">Not sure</span></button>
+        </div>
+        <div class="choice-grid" id="size-grid-office" style="display:none">
+          <button class="choice" data-field="size" data-val="Under 1,000 sq ft"><span class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="8" width="10" height="12" rx="0.5"/><path d="M10 11h1.5M13 11h1.5M10 14h1.5M13 14h1.5"/><path d="M11 20v-3h2v3"/></svg></span><span class="c-label">Under 1,000 sq ft</span></button>
+          <button class="choice" data-field="size" data-val="1,000-3,000 sq ft"><span class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="6" width="14" height="14" rx="0.5"/><path d="M8 9h2M13 9h2M8 12.5h2M13 12.5h2"/><path d="M10.5 20v-3.5h3V20"/></svg></span><span class="c-label">1,000–3,000 sq ft</span></button>
+          <button class="choice" data-field="size" data-val="3,000-10,000 sq ft"><span class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="10" height="16" rx="0.5"/><path d="M15 10h6v10h-6"/><path d="M5.5 7h2M9.5 7h2M5.5 11h2M9.5 11h2M5.5 15h2M9.5 15h2"/><path d="M17 13h2M17 16.5h2"/></svg></span><span class="c-label">3,000–10,000 sq ft</span></button>
+          <button class="choice" data-field="size" data-val="10,000+ sq ft"><span class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20V9h5v11"/><path d="M8 20V4h8v16"/><path d="M16 20v-8h5v8"/><path d="M10.5 7h3M10.5 11h3M10.5 15h3"/></svg></span><span class="c-label">10,000+ sq ft</span></button>
+          <button class="choice" data-field="size" data-val="Not sure (office)"><span class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.6 2.6 0 1 1 3.6 2.4c-.7.3-1.1.9-1.1 1.7v.4"/><path d="M12 17.5v.01"/></svg></span><span class="c-label">Not sure</span></button>
         </div>
       </div>
 
@@ -208,13 +258,14 @@
       <div class="step" data-step="4">
         <h2>What additional<br>services do you<br>anticipate needing?</h2>
         <div class="choice-grid" id="extras">
-          <button class="choice" data-extra="Packing">Packing</button>
-          <button class="choice" data-extra="Unpacking">Unpacking</button>
-          <button class="choice" data-extra="Storage">Storage</button>
-          <button class="choice" data-extra="Custom crating">Custom crating</button>
-          <button class="choice" data-extra="Piano / specialty">Piano / specialty</button>
-          <button class="choice" data-extra="None">None of these</button>
+          <button class="choice" data-extra="Packing"><span class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h16v11H4z"/><path d="M4 9l3-5h10l3 5"/><path d="M12 9v11"/><path d="M10 12.5h4"/></svg></span><span class="c-label">Packing</span></button>
+          <button class="choice" data-extra="Unpacking"><span class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h16v11H4z"/><path d="M4 9L2 4.5l5.5-1L12 9"/><path d="M20 9l2-4.5-5.5-1L12 9"/></svg></span><span class="c-label">Unpacking</span></button>
+          <button class="choice" data-extra="Storage"><span class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9l8-5 8 5v11H4z"/><path d="M8 20v-6h8v6"/><path d="M8 17h8"/></svg></span><span class="c-label">Storage</span></button>
+          <button class="choice" data-extra="Custom crating"><span class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9h15v11H3z"/><path d="M3 9l2.5-2.5h15L18 9"/><path d="M18 9l2.5-2.5v11L18 20"/><path d="M3 14.5h15"/><path d="M8 9v11"/></svg></span><span class="c-label">Custom crating</span></button>
+          <button class="choice" data-extra="Piano / specialty"><span class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14.5V9c0-3.6 2.7-6.5 6.2-6.5S16.4 5.4 16.4 9c0 1.6 1 2.4 2.2 2.4 1.3 0 2 .9 2 2.1v1z"/><path d="M4 14.5h16.6V19H4z"/><path d="M7.3 14.5v4.5M10.6 14.5v4.5M13.9 14.5v4.5M17.2 14.5v4.5"/></svg></span><span class="c-label">Piano / specialty</span></button>
+          <button class="choice" data-extra="None"><span class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg></span><span class="c-label">None of these</span></button>
         </div>
+        <p class="choice-hint">Select all that apply.</p>
       </div>
 
       <!-- Step 5: contact -->
@@ -222,7 +273,7 @@
         <h2>How can we<br>reach you?</h2>
         <div class="form-row">
           <div class="field"><label>Name</label><input type="text" id="name" required placeholder="Your name"></div>
-          <div class="field"><label>Phone</label><input type="tel" id="phone" placeholder="(774) ..."></div>
+          <div class="field"><label>Phone</label><input type="tel" id="phone" placeholder="(774) 421-9004"></div>
         </div>
         <div class="form-row full">
           <div class="field"><label>Email</label><input type="email" id="email" required placeholder="you@email.com"></div>
@@ -236,7 +287,7 @@
       <div class="step" data-step="6">
         <div class="success">
           <h3>Got it.<br>Talk soon.</h3>
-          <p>We'll be in touch within a business day to schedule your walkthrough. If it's urgent, ring us at <a href="tel:7744219004" style="color:var(--mint);">(774) 421-9004</a>.</p>
+          <p>One of our team members will be in touch within a business day to schedule your walkthrough. If it's urgent, ring us at <a href="tel:7744219004" style="color:var(--mint);">(774) 421-9004</a>.</p>
         </div>
       </div>
 
@@ -260,6 +311,14 @@
   const nextBtn = document.getElementById('next');
 
   function isStorageOnly() { return state.type === 'Storage only'; }
+  function isCommercial() { return state.type === 'Commercial / office'; }
+
+  function updateStep2UI() {
+    const office = isCommercial();
+    document.getElementById('size-grid-home').style.display = office ? 'none' : '';
+    document.getElementById('size-grid-office').style.display = office ? '' : 'none';
+    document.getElementById('step2-title').innerHTML = office ? 'How big is<br>the space?' : 'How big is<br>the move?';
+  }
 
   function isValid() {
     switch (state.step) {
@@ -300,6 +359,7 @@
     } else {
       document.getElementById('actions').style.display = '';
       nextBtn.innerHTML = (n === totalSteps ? 'Submit' : 'Next') + ' <span class="arrow"></span>';
+      if (n === 2) updateStep2UI();
       if (n === 3) updateStep3UI();
       updateNext();
     }
@@ -311,6 +371,10 @@
       const f = btn.dataset.field;
       document.querySelectorAll(`.choice[data-field="${f}"]`).forEach(b => b.classList.remove('on'));
       btn.classList.add('on');
+      if (f === 'type' && state.type !== btn.dataset.val) {
+        state.size = null;
+        document.querySelectorAll('.choice[data-field="size"]').forEach(b => b.classList.remove('on'));
+      }
       state[f] = btn.dataset.val;
       updateNext();
     });
@@ -331,6 +395,19 @@
       updateNext();
     });
   });
+
+  // Phone auto-formatting: (774) 421-9004
+  const phoneEl = document.getElementById('phone');
+  if (phoneEl) {
+    phoneEl.addEventListener('input', () => {
+      const d = phoneEl.value.replace(/\D/g, '').slice(0, 10);
+      let out = d;
+      if (d.length > 6) out = `(${d.slice(0,3)}) ${d.slice(3,6)}-${d.slice(6)}`;
+      else if (d.length > 3) out = `(${d.slice(0,3)}) ${d.slice(3)}`;
+      else if (d.length > 0) out = `(${d}`;
+      phoneEl.value = out;
+    });
+  }
 
   // Text input steps
   ['from', 'to', 'name', 'email'].forEach(id => {
